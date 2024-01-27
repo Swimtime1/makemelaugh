@@ -96,5 +96,22 @@ public class GameManager : MonoBehaviour
         startScreen.SetActive(false);
         startActive = true;
         tutorial.SetActive(true);
+        eventText.text = "";
+        StartCoroutine(DisplayTutorial());
+    }
+
+    // Displays Tutorial Information at Type-Writer Pace
+    IEnumerator DisplayTutorial()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        string cont = "Press any button to start playing!";
+
+        // Types out cont one letter at a time
+        foreach (char i in cont) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            eventText.text += i;
+        }
     }
 }
