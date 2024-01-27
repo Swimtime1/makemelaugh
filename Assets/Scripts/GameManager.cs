@@ -16,9 +16,10 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen, gameWonScreen;
     public GameObject startScreen, inGameUI, tutorial;
     public GameObject p1, p2;
+    public GameObject p1Tutorial, p2Tutorial;
 
     // TextMeshProUGUI Variables
-    public TextMeshProUGUI eventText;
+    public TextMeshProUGUI contText, p1Move, p1Shoot, p1Title, p2Move, p2Shoot, p2Title;
 
     // Script Variables
     public PlayerController player1Script, player2Script;
@@ -45,6 +46,14 @@ public class GameManager : MonoBehaviour
         p2.SetActive(false);
 
         titleAudio.Play();
+
+        contText.text = "";
+        p1Move.text = "";
+        p1Shoot.text = "";
+        p1Title.text = "";
+        p2Move.text = "";
+        p2Shoot.text = "";
+        p2Title.text = "";
     }
 
     // Closes the Start Menu, and gives control of Players
@@ -95,8 +104,29 @@ public class GameManager : MonoBehaviour
     {
         startScreen.SetActive(false);
         startActive = true;
+
+        // Determines whether to display information for another player
+        if(twoPlayer)
+        {
+            float xPos1 = p1Tutorial.transform.position.x;
+            float yPos1 = p1Tutorial.transform.position.y;
+            
+            float xPos2 = p2Tutorial.transform.position.x;
+            float yPos2 = p2Tutorial.transform.position.y;
+            
+            p1Tutorial.transform.position = new Vector3(xPos1, yPos1, 0f);
+            p2Tutorial.transform.position = new Vector3(xPos2, yPos2, 0f);
+        }
+        else
+        {
+            float xPos = (p1Tutorial.transform.position.x + p2Tutorial.transform.position.x) / 2;
+            float yPos = p1Tutorial.transform.position.y;
+            
+            p1Tutorial.transform.position = new Vector3(xPos, yPos, 0f);
+            p2Tutorial.SetActive(false);
+        }
+
         tutorial.SetActive(true);
-        eventText.text = "";
         StartCoroutine(DisplayTutorial());
     }
 
@@ -105,13 +135,71 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         
-        string cont = "Press any button to start playing!";
-
-        // Types out cont one letter at a time
-        foreach (char i in cont) 
+        string text;
+        
+        // Determines whether to display information for another player
+        if(twoPlayer) { StartCoroutine(DisplayP2()); }
+        
+        // Types out how p1 moves, one letter at a time
+        text = "Player 1";
+        foreach (char i in text) 
         {
             yield return new WaitForSeconds(0.1f);
-            eventText.text += i;
+            p1Title.text += i;
+        }
+        
+        // Types out Player 1, one letter at a time
+        text = "How To Move\nW - Move Up\nS - Move Down\nA - Move Left\nD - Move Right";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            p1Move.text += i;
+        }
+
+        // Types out how p1 shoots, one letter at a time
+        text = "How To Shoot";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            p1Shoot.text += i;
+        }
+
+        // Types out how to start playing one letter at a time
+        text = "Press any button to start playing!";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            contText.text += i;
+        }
+    }
+
+    // Types out information for Player 2
+    IEnumerator DisplayP2()
+    {
+        string text;
+        
+        // Types out Player 2, one letter at a time
+        text = "Player 2";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            p2Title.text += i;
+        }
+    
+        // Types out how p2 moves, one letter at a time
+        text = "How To Move\nI - Move Up\nK - Move Down\nJ - Move Left\nL - Move Right";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            p2Move.text += i;
+        }
+
+        // Types out how p2 shoots, one letter at a time
+        text = "How To Shoot";
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            p2Shoot.text += i;
         }
     }
 }
