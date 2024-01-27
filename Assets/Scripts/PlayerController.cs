@@ -38,7 +38,9 @@ public class PlayerController : MonoBehaviour
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
 
-        movingUp = Mathf.Abs(playerMovement.x) >= playerMovement.y;
+        if(playerMovement.magnitude > 0) {
+            movingUp = Mathf.Abs(playerMovement.x) > playerMovement.y;
+        }
 
         if(playerMovement.x < 0) {
             transform.localScale = new Vector3(-1, 1, 1);
