@@ -27,11 +27,10 @@ public class Projectile : MonoBehaviour
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {            
-        //Make explosion effect
         Instantiate(explosion, transform.position, transform.rotation);
 
-        if(collision.transform.gameObject.GetComponent<Projectile>()) {
-            Destroy(collision.transform.gameObject);
+        if(collision.transform.gameObject.GetComponent<PlayerController>()) {
+            // Destroy(collision.transform.gameObject);
         }
 
         Destroy(gameObject);

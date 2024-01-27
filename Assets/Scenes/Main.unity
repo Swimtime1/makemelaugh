@@ -408,6 +408,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 96dcd43e-ca5f-4552-80e7-f08cc8ba4f4b
     m_ActionName: Player 2/Move[/Keyboard/i,/Keyboard/k,/Keyboard/j,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8eaa84c6-c031-442e-b06c-eea7ee0958ae
+    m_ActionName: Player 1/Cartwheel[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 45108037}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Cartwheel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d4dbb670-bb25-4aab-9d42-c962f1d9e3f1
+    m_ActionName: Player 2/Cartwheel[/Keyboard/7]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player 2
@@ -1892,6 +1912,26 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 96dcd43e-ca5f-4552-80e7-f08cc8ba4f4b
     m_ActionName: Player 2/Move[/Keyboard/i,/Keyboard/k,/Keyboard/j,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1043530406}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Cartwheel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8eaa84c6-c031-442e-b06c-eea7ee0958ae
+    m_ActionName: Player 1/Cartwheel[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d4dbb670-bb25-4aab-9d42-c962f1d9e3f1
+    m_ActionName: Player 2/Cartwheel[/Keyboard/7]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player 1
