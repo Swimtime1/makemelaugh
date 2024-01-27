@@ -406,6 +406,9 @@ MonoBehaviour:
   movingUp: 0
   isDead: 0
   animator: {fileID: 45108040}
+  movement: {fileID: 2108182283}
+  step: {fileID: 8300000, guid: 37ef37bc299ad7e46a73b8d463e91daa, type: 3}
+  ballonSwing: {fileID: 8300000, guid: 2ab7df119e6af704cbcd43f110bf8071, type: 3}
 --- !u!50 &45108038
 Rigidbody2D:
   serializedVersion: 4
@@ -5485,6 +5488,9 @@ MonoBehaviour:
   movingUp: 0
   isDead: 0
   animator: {fileID: 1043530409}
+  movement: {fileID: 2108182283}
+  step: {fileID: 8300000, guid: 37ef37bc299ad7e46a73b8d463e91daa, type: 3}
+  ballonSwing: {fileID: 8300000, guid: 2ab7df119e6af704cbcd43f110bf8071, type: 3}
 --- !u!50 &1043530407
 Rigidbody2D:
   serializedVersion: 4
@@ -5700,7 +5706,6 @@ MonoBehaviour:
   player2Script: {fileID: 45108037}
   titleAudio: {fileID: 942405241}
   mainAudio: {fileID: 837214669}
-  AudioFX: {fileID: 2108182283}
   heehaha: {fileID: 8300000, guid: fc8b926aaa9e2fb4ba8d9e6184279532, type: 3}
 --- !u!4 &1145059301
 Transform:
@@ -6413,7 +6418,7 @@ GameObject:
   - component: {fileID: 2108182282}
   - component: {fileID: 2108182283}
   m_Layer: 0
-  m_Name: SoundFX
+  m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6444,12 +6449,12 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 37ef37bc299ad7e46a73b8d463e91daa, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
-  Mute: 0
+  Loop: 1
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

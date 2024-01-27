@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     bool performingCartwheel;
     Vector2 cartwheelSpeed;
 
+    public AudioSource movement;
+    public AudioClip step, ballonSwing;
+
     void Update() {
         if(collider == null) { collider = GetComponent<Collider2D>(); }
 
@@ -64,6 +67,12 @@ public class PlayerController : MonoBehaviour
             } else {
                 rigidbody.velocity = playerMovement;
             }
+
+            // Plays foostep sound while the player is moving
+            if(playerMovement.magnitude != 0) {
+                movement.mute = false;
+            }
+            else { movement.mute = true; }
         }
     }
 
