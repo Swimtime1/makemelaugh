@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidbody;
     private Collider2D collider;
     public bool movingUp;
+    public bool isDead;
 
     public Animator animator;
 
@@ -54,12 +55,15 @@ public class PlayerController : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if(rigidbody == null) { rigidbody = GetComponent<Rigidbody2D>(); }
+        // Only allows movement if the player is alive
+        if(!isDead){
+            if(rigidbody == null) { rigidbody = GetComponent<Rigidbody2D>(); }
         
-        if(performingCartwheel) {
-            rigidbody.velocity = cartwheelSpeed;
-        } else {
-            rigidbody.velocity = playerMovement;
+            if(performingCartwheel) {
+                rigidbody.velocity = cartwheelSpeed;
+            } else {
+                rigidbody.velocity = playerMovement;
+            }
         }
     }
 
@@ -95,5 +99,17 @@ public class PlayerController : MonoBehaviour
 
     public void Hit(float damage) {
         health -= damage;
+    }
+
+    // Plays the Death Animations
+    public void Death() {
+        animator.SetBool("IsDead", true);
+        isDead = true;
+    }
+
+    // Plays the Revival Animation
+    public void Revive() {
+        animator.SetBool("IsDead", false);
+        isDead = false;
     }
 }
