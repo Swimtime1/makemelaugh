@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Plays foostep sound while the player is moving
-        movement.mute = playerMovement.magnitude == 0;
+        /* movement.mute = playerMovement.magnitude == 0; */
     }
 
     public void MovementAction(InputAction.CallbackContext obj) {
@@ -170,5 +170,10 @@ public class PlayerController : MonoBehaviour
     // Plays the Revival Animation
     public void Revive() {
         isDead = false;
+    }
+
+    // Plays the step sound effect
+    public void Step(){
+        movement.PlayOneShot(step);
     }
 }
