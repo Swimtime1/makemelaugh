@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject explosion;
+
     float bulletDamage;
     public float bulletSpeed;
 
@@ -24,12 +26,15 @@ public class Projectile : MonoBehaviour
         bulletSpeed = speed;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision) {
+    public void OnCollisionEnter2D(Collision2D collision) {            
+        //Make explosion effect
+        Instantiate(explosion, transform.position, transform.rotation);
+
         if(collision.transform.gameObject.GetComponent<Projectile>()) {
-            //Make explosion effect
-            //Destroy both projectiles
             Destroy(collision.transform.gameObject);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
+
     }
 }
