@@ -59,6 +59,10 @@ public class GameManager : MonoBehaviour
     // Closes the Start Menu, and gives control of Players
     public void StartGame()
     {
+        // Activates the necessary number of players
+        if(twoPlayer) { p2.SetActive(true); }
+        p1.SetActive(true);
+
         gameStarted = true;
 
         tutorial.SetActive(false);
@@ -84,7 +88,6 @@ public class GameManager : MonoBehaviour
     {
         twoPlayer = false;
         p1.transform.position = new Vector3(0f, -4.43f, 0f);
-        p1.SetActive(true);
         OpenTutorial();
     }
 
@@ -94,8 +97,6 @@ public class GameManager : MonoBehaviour
         twoPlayer = true;
         p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
         p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
-        p1.SetActive(true);
-        p2.SetActive(true);
         OpenTutorial();
     }
 
@@ -135,10 +136,15 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         
-        string text;
-        
         // Determines whether to display information for another player
         if(twoPlayer) { StartCoroutine(DisplayP2()); }
+        StartCoroutine(DisplayP1());
+    }
+
+    // Types out information for Player 1
+    IEnumerator DisplayP1()
+    {
+        string text;
         
         // Types out how p1 moves, one letter at a time
         text = "Player 1";
@@ -164,13 +170,7 @@ public class GameManager : MonoBehaviour
             p1Shoot.text += i;
         }
 
-        // Types out how to start playing one letter at a time
-        text = "Press any button to start playing!";
-        foreach (char i in text) 
-        {
-            yield return new WaitForSeconds(0.1f);
-            contText.text += i;
-        }
+        StartCoroutine(HowToStart());
     }
 
     // Types out information for Player 2
@@ -200,6 +200,19 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             p2Shoot.text += i;
+        }
+    }
+
+    // Types out how to start playing
+    IEnumerator HowToStart()
+    {
+        string text = "Press any button to start playing!";
+
+        // Types out how to start playing one letter at a time
+        foreach (char i in text) 
+        {
+            yield return new WaitForSeconds(0.1f);
+            contText.text += i;
         }
     }
 }
