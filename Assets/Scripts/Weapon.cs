@@ -23,29 +23,40 @@ public class Weapon : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if(isAttacking && cooldown <= 0) {
-            cooldown = useSpeed;
-
-            if(isRange && projectilePrefab != null) {
-                for(int i = -spread / 2; i <= spread / 2; i++) {
-                    print(i);
-                    GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, i*10));
-                }
-
-            } else if(!isRange) {
-
-            }
+        if(isAttacking && cooldown <= 0 && autoUse) {
+            DoAttack();
         }
 
         cooldown -= Time.deltaTime;
+        
+        if(cooldown <= 0) {
+            cooldown = 0;
+        }
+    }
 
+    void DoAttack() {
+        cooldown = useSpeed;
+
+        if(isRange && projectilePrefab != null) {
+            for(int i = -spread / 2; i <= spread / 2; i++) {
+                print(i);
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, i*10));
+            }
+
+        } else if(!isRange) {
+
+        }
     }
 
     public void StartAttack() {
-
+        if(!autoUse && cooldown <= 0) {
+            DoAttack();
+        } else {
+            isAttacking = true; 
+        }
     }
 
     public void StopAttack() {
-
+        isAttacking = false;
     }
 }
