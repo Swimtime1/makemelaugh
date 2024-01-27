@@ -27,12 +27,13 @@ public class PlayerController : MonoBehaviour
         if(collider == null) { collider = GetComponent<Collider2D>(); }
 
         performingCartwheel = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.5f;
+        bool cartwheelInvinciblityActive = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.7f;
 
         cartwheelCooldown -= Time.deltaTime;
 
         if(performingCartwheel) {
             transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * 720 * -transform.localScale.x);
-        } else if (!collider.enabled) {
+        } else if (!cartwheelInvinciblityActive && !collider.enabled) {
             cartwheelSpeed = Vector2.zero;
             transform.rotation = Quaternion.identity;
             collider.enabled = true;
