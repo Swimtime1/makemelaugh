@@ -33,9 +33,12 @@ public class PlayerController : MonoBehaviour
 
         if(performingCartwheel) {
             transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * 720 * -transform.localScale.x);
-        } else if (!cartwheelInvinciblityActive && !collider.enabled) {
+        } else {
             cartwheelSpeed = Vector2.zero;
             transform.rotation = Quaternion.identity;
+        } 
+        
+        if (!cartwheelInvinciblityActive && !collider.enabled) {
             collider.enabled = true;
         }
 
