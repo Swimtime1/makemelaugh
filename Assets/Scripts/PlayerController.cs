@@ -10,29 +10,52 @@ public class PlayerController : MonoBehaviour
     private Vector2 playerMovement;
     private float moveSpeed = 3;
 
-    private Rigidbody2D rb;
-
+    private Rigidbody2D rigidbody;
+    private Collider2D collider;
     public bool movingUp;
 
     public Animator animator;
 
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
+    float health = 100;
 
-    // Update is called once per frame
+    const float CARTWHEEL_COOLDOWN_TIMER = 3;
+    float cartwheelCooldown;
+    bool performingCartwheel;
+    Vector2 cartwheelSpeed;
+
     void Update() {
+        if(collider == null) { collider = GetComponent<Collider2D>(); }
+
         if(animator) {
             animator.SetBool("FaceScreen", movingUp);
-            animator.SetBool("IsRunning", ((playerMovement.x != 0f) || (playerMovement.y != 0f)));
+            animator.SetBool("IsRunning", playerMovement.magnitude != 0f);
+        }
+
+        performingCartwheel = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.5f;
+
+        cartwheelCooldown -= Time.deltaTime;
+
+        if(performingCartwheel) {
+            transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * 720 * -transform.localScale.x);
+        } else if (!collider.enabled) {
+            cartwheelSpeed = Vector2.zero;
+            transform.rotation = Quaternion.identity;
+            collider.enabled = true;
+        }
+
+        if(cartwheelCooldown < 0) {
+            cartwheelCooldown = 0;
         }
     }
 
     void FixedUpdate() {
-        if(rb == null) { rb = GetComponent<Rigidbody2D>(); }
-
-        rb.velocity = playerMovement;
+        if(rigidbody == null) { rigidbody = GetComponent<Rigidbody2D>(); }
+        
+        if(performingCartwheel) {
+            rigidbody.velocity = cartwheelSpeed;
+        } else {
+            rigidbody.velocity = playerMovement;
+        }
     }
 
     public void MovementAction(InputAction.CallbackContext obj) {
@@ -49,4 +72,23 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Cartwheel(InputAction.CallbackContext obj) {
+        if(collider == null) { collider = GetComponent<Collider2D>(); }
+
+        if(cartwheelCooldown > 0) { return; }
+
+        cartwheelSpeed = Vector2.zero;
+
+        if(playerMovement.magnitude > 0) {
+            cartwheelSpeed = playerMovement.normalized * 6;
+        }
+
+        cartwheelCooldown = CARTWHEEL_COOLDOWN_TIMER;
+
+        collider.enabled = false;
+    }
+
+    public void Hit(float damage) {
+        health -= damage;
+    }
 }
