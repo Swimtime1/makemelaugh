@@ -26,11 +26,6 @@ public class PlayerController : MonoBehaviour
     void Update() {
         if(collider == null) { collider = GetComponent<Collider2D>(); }
 
-        if(animator) {
-            animator.SetBool("FaceScreen", movingUp);
-            animator.SetBool("IsRunning", playerMovement.magnitude != 0f);
-        }
-
         performingCartwheel = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.5f;
 
         cartwheelCooldown -= Time.deltaTime;
@@ -45,6 +40,12 @@ public class PlayerController : MonoBehaviour
 
         if(cartwheelCooldown < 0) {
             cartwheelCooldown = 0;
+        }
+
+        if(animator) {
+            animator.SetBool("FaceScreen", movingUp);
+            animator.SetBool("IsRunning", playerMovement.magnitude != 0f);
+            animator.SetBool("IsCartwheeling", performingCartwheel);
         }
     }
 
