@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     bool performingCartwheel;
     Vector2 cartwheelSpeed;
 
-    public AudioSource movement;
-    public AudioClip step, ballonSwing;
+    public AudioSource movement, soundFX;
+    public AudioClip step, cartwheelSFX, ballonSwing;
 
     void Update() {
         if(collider == null) { collider = GetComponent<Collider2D>(); }
@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
         cartwheelCooldown = CARTWHEEL_COOLDOWN_TIMER;
 
         collider.enabled = false;
+
+        soundFX.PlayOneShot(cartwheelSFX);
     }
 
     public void Hit(float damage) {
