@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject startScreen, inGameUI, tutorial;
     public GameObject p1, p2;
     public GameObject p1Tutorial, p2Tutorial;
+    public GameObject ground;
 
     // TextMeshProUGUI Variables
     public TextMeshProUGUI contText, p1Move, p1Shoot, p1Title, p2Move, p2Shoot, p2Title;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         gameWonScreen.SetActive(false);
         p1.SetActive(false);
         p2.SetActive(false);
+        ground.SetActive(false);
 
         titleAudio.Play();
 
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
     // Closes the Start Menu, and gives control of Players
     public void StartGame()
     {
+        ground.SetActive(true);
+        
         // Activates the necessary number of players
         if(twoPlayer) { p2.SetActive(true); }
         p1.SetActive(true);
