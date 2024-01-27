@@ -16,11 +16,6 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody2D>().AddTorque(rotationSpeed, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     public void Initialize(float damage, float speed) {
         bulletDamage = damage;
         bulletSpeed = speed;
