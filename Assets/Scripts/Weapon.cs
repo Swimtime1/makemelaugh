@@ -15,11 +15,15 @@ public class Weapon : MonoBehaviour {
     private float cooldown = 0;
     public bool isAttacking = false;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start() {
         if(projectilePrefab != null) {
             projectilePrefab.GetComponent<Projectile>().Initialize(damage, projectileSpeed);
         }
+
+        animator = GetComponent<Animator>();
     }
 
     void FixedUpdate() {
@@ -35,6 +39,10 @@ public class Weapon : MonoBehaviour {
     }
 
     void DoAttack() {
+        if(animator == null) { animator = GetComponent<Animator>(); }
+
+        animator.SetTrigger("OneShotAttack");
+
         cooldown = useSpeed;
 
         if(isRange && projectilePrefab != null) {
