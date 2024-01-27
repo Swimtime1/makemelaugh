@@ -10,10 +10,11 @@ public class GameManager : MonoBehaviour
     // Bool Variables
     public bool gameOver, gameStarted;
     public static bool twoPlayer;
+    private bool startActive;
 
     // GameObject Variables
     public GameObject gameOverScreen, gameWonScreen;
-    public GameObject startScreen, inGameUI;
+    public GameObject startScreen, inGameUI, tutorial;
     public GameObject p1, p2;
 
     // TextMeshProUGUI Variables
@@ -21,19 +22,29 @@ public class GameManager : MonoBehaviour
 
     // Script Variables
     public PlayerController player1Script, player2Script;
+
+    // AudioSource Variables
+    public AudioSource titleAudio, mainAudio, AudioFX;
+
+    // AudioClip Variables
+    public AudioClip heehaha;
     
     // Start is called before the first frame update
     void Start()
     {
         gameStarted = false;
         gameOver = false;
+        startActive = true;
 
         startScreen.SetActive(true);
         inGameUI.SetActive(false);
+        tutorial.SetActive(false);
         gameOverScreen.SetActive(false);
         gameWonScreen.SetActive(false);
-        p1.SetActive(true);
+        p1.SetActive(false);
         p2.SetActive(false);
+
+        titleAudio.Play();
     }
 
     // Closes the Start Menu, and gives control of Players
@@ -41,14 +52,23 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = true;
 
-        startScreen.SetActive(false);
+        tutorial.SetActive(false);
         inGameUI.SetActive(true);
+
+        titleAudio.Stop();
+        mainAudio.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Closes the Tutorial Menu
+        if(startActive && Input.GetKeyDown("enter"))
+        {
+            Debug.Log("Enter pressed");
+            startActive = false;
+            StartGame();
+        }
     }
 
     // Sets the Game Mode to Single Player
@@ -56,7 +76,8 @@ public class GameManager : MonoBehaviour
     {
         twoPlayer = false;
         p1.transform.position = new Vector3(0f, -4.43f, 0f);
-        StartGame();
+        p1.SetActive(true);
+        OpenTutorial();
     }
 
     // Sets the Game Mode to Multi-Player
@@ -65,7 +86,15 @@ public class GameManager : MonoBehaviour
         twoPlayer = true;
         p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
         p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
+        p1.SetActive(true);
         p2.SetActive(true);
-        StartGame();
+        OpenTutorial();
+    }
+
+    // Opens the Tutorial Page
+    public void OpenTutorial()
+    {
+        startScreen.SetActive(false);
+        tutorial.SetActive(true);
     }
 }
