@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
 
-        if(playerMovement.x < playerMovement.y) { movingUp = true; }
+        movingUp = playerMovement.x < playerMovement.y;
     }
 
 }
