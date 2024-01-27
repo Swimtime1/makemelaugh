@@ -15,7 +15,9 @@ public class Weapon : MonoBehaviour {
     private float cooldown = 0;
     public bool isAttacking = false;
 
-    public Animator animator;
+    private Animator animator;
+
+    private Collider2D collider;
 
     // Start is called before the first frame update
     void Start() {
@@ -24,6 +26,13 @@ public class Weapon : MonoBehaviour {
         }
 
         animator = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
+    }
+
+    void Update() {
+        if(animator == null) { animator = GetComponent<Animator>(); }
+        if(collider == null) { collider = GetComponent<Collider2D>(); }
+
     }
 
     void FixedUpdate() {
@@ -39,8 +48,6 @@ public class Weapon : MonoBehaviour {
     }
 
     void DoAttack() {
-        if(animator == null) { animator = GetComponent<Animator>(); }
-
         animator.SetTrigger("OneShotAttack");
 
         cooldown = useSpeed;
@@ -68,9 +75,17 @@ public class Weapon : MonoBehaviour {
         isAttacking = false;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision) { 
+    public void OnTriggerEnter2D(Collider2D collision) { 
         if(isRange) { return; }
 
         //If melee, deal damage
+    }
+
+    public void EnableHurtbox() {
+        collider.enabled = true;
+    }
+
+    public void DisableHurtbox() {
+        collider.enabled = false;
     }
 }

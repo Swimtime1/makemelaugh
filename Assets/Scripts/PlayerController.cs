@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource movement, soundFX;
     public AudioClip step, cartwheelSFX, ballonSwing;
 
-    Transform weapons;
+    Transform weapons, meleeWeapon, rangeWeapon;
     
     void Start() {
         collider = GetComponent<Collider2D>();
@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         weapons = transform.GetChild(0);
+        meleeWeapon = weapons.GetChild(0);
+        rangeWeapon = weapons.GetChild(1);
     }
 
     void Update() {
@@ -45,6 +47,9 @@ public class PlayerController : MonoBehaviour
         if(sprite == null) { sprite = GetComponent<SpriteRenderer>(); }
 
         if(weapons == null) { weapons = transform.GetChild(0); }
+        if(meleeWeapon == null) { meleeWeapon = weapons.GetChild(0); }
+        if(rangeWeapon == null) { rangeWeapon = weapons.GetChild(1); }
+
 
         //Cartwheel
         performingCartwheel = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.5f;
@@ -69,15 +74,13 @@ public class PlayerController : MonoBehaviour
 
         //Weapons
         if(playerMovement.magnitude > 0) {
-            weapons.localScale = new Vector3(sprite.flipX ? -1 : 1, 1, 1);
-            // weapons.localPosition = new Vector3(sprite.flipX ? -1 : 1, 1, 1);
-            // weapons.localPosition = playerMovement.normalized;
-            // weapons.GetChild(0).localRotation = Quaternion.LookRotation(Vector3.forward, playerMovement.normalized);
+            meleeWeapon.localScale = new Vector3(sprite.flipX ? -1 : 1, 1, 1);
+            rangeWeapon.localPosition = playerMovement.normalized;
+            rangeWeapon.localRotation = Quaternion.LookRotation(Vector3.forward, playerMovement.normalized);
         }
 
         if(!performingCartwheel && !isDead) {
             if(!weapons.gameObject.activeSelf) { weapons.gameObject.SetActive(true); }
-
         } else {
             if(weapons.gameObject.activeSelf) { weapons.gameObject.SetActive(false); }
         }
@@ -136,7 +139,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void AttackAction(InputAction.CallbackContext obj) {
-        if(isDead) { return; }
+        if(obj.canceled) {
+            //Stop attacking
+        }
+        
+        if(!weapons.gameObject.activeSelf) { return; }
+
+        if(obj.started) {
+            //Start attacking
+        }
     }
 
     public void Hit(float damage) {
