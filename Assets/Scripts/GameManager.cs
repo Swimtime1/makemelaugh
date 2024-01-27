@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player1Script, player2Script;
 
     // AudioSource Variables
-    public AudioSource titleAudio, mainAudio, AudioFX;
+    public AudioSource titleAudio, mainAudio;
 
     // AudioClip Variables
     public AudioClip heehaha;
