@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     public void SetSingle()
     {
         twoPlayer = false;
+        p1.transform.position = new Vector3(0f, -4.43f, 0f);
         StartGame();
     }
 
@@ -60,6 +61,8 @@ public class GameManager : MonoBehaviour
     public void SetMulti()
     {
         twoPlayer = true;
+        p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
+        p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
         p2.SetActive(true);
         StartGame();
     }
