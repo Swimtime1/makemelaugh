@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
 
-        movingUp = Mathf.Abs(playerMovement.x) < playerMovement.y;
+        movingUp = Mathf.Abs(playerMovement.x) > playerMovement.y;
     }
 
 }
