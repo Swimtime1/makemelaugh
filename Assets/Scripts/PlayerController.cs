@@ -23,8 +23,10 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        animator.SetBool("FaceScreen", movingUp);
-        animator.SetBool("IsRunning", ((playerMovement.x != 0f) || (playerMovement.y != 0f)));
+        if(animator) {
+            animator.SetBool("FaceScreen", movingUp);
+            animator.SetBool("IsRunning", ((playerMovement.x != 0f) || (playerMovement.y != 0f)));
+        }
     }
 
     void FixedUpdate() {
@@ -37,6 +39,12 @@ public class PlayerController : MonoBehaviour
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
 
         movingUp = Mathf.Abs(playerMovement.x) > playerMovement.y;
+
+        if(playerMovement.x < 0) {
+            transform.localScale = new Vector3(-1, 1, 1);
+        } else if (playerMovement.x > 0) {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
 }
