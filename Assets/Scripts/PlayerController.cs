@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed = 3;
 
     private Rigidbody2D rb;
+
+    public bool movingUp;
     // Start is called before the first frame update
     void Start() {
         
@@ -29,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     public void MovementAction(InputAction.CallbackContext obj) {
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
+
+        if(playerMovement.x < playerMovement.y) { movingUp = true; }
     }
 
 }
