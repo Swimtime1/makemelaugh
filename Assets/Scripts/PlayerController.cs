@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         playerMovement = obj.ReadValue<Vector2>() * moveSpeed;
 
         if(playerMovement.magnitude > 0) {
-            movingUp = Mathf.Abs(playerMovement.x) > playerMovement.y;
+            movingUp = playerMovement.y <= 0;
         }
 
         if(playerMovement.x < 0) {
