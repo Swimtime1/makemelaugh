@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     public bool movingUp;
+
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -20,7 +23,8 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        
+        animator.SetBool("FaceScreen", movingUp);
+        animator.SetBool("IsRunning", ((playerMovement.x != 0f) || (playerMovement.y != 0f)));
     }
 
     void FixedUpdate() {

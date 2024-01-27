@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 45108037}
   - component: {fileID: 45108039}
   - component: {fileID: 45108038}
+  - component: {fileID: 45108040}
   m_Layer: 0
   m_Name: P2
   m_TagString: Player
@@ -266,6 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac6dcd0071b2844e810bc72ad6be58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingUp: 0
+  animator: {fileID: 45108040}
 --- !u!50 &45108038
 Rigidbody2D:
   serializedVersion: 4
@@ -338,6 +341,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &45108040
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45108034}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00431c4dba182134db74d9cc03b86dd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &71288556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,6 +1592,7 @@ GameObject:
   - component: {fileID: 1043530406}
   - component: {fileID: 1043530408}
   - component: {fileID: 1043530407}
+  - component: {fileID: 1043530409}
   m_Layer: 0
   m_Name: P1
   m_TagString: Player
@@ -1654,6 +1679,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac6dcd0071b2844e810bc72ad6be58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingUp: 0
+  animator: {fileID: 1043530409}
 --- !u!50 &1043530407
 Rigidbody2D:
   serializedVersion: 4
@@ -1726,6 +1753,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &1043530409
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043530403}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 00431c4dba182134db74d9cc03b86dd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1145059299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1764,7 +1812,7 @@ MonoBehaviour:
   tutorial: {fileID: 761212714}
   p1: {fileID: 1043530403}
   p2: {fileID: 45108034}
-  eventText: {fileID: 0}
+  eventText: {fileID: 846909830}
   player1Script: {fileID: 1043530406}
   player2Script: {fileID: 45108037}
   titleAudio: {fileID: 942405241}

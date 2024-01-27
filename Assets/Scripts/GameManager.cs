@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         gameStarted = false;
         gameOver = false;
-        startActive = true;
+        startActive = false;
 
         startScreen.SetActive(true);
         inGameUI.SetActive(false);
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Closes the Tutorial Menu
-        if(startActive && Input.GetKeyDown("enter"))
+        if(startActive && Input.anyKeyDown)
         {
             Debug.Log("Enter pressed");
             startActive = false;
@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
     public void OpenTutorial()
     {
         startScreen.SetActive(false);
+        startActive = true;
         tutorial.SetActive(true);
     }
 }
