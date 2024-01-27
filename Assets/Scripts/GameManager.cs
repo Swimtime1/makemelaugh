@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         // Closes the Tutorial Menu
         if(startActive && Input.anyKeyDown)
         {
-            Debug.Log("Enter pressed");
             startActive = false;
             StartGame();
         }
