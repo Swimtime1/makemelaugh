@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
         startScreen.SetActive(true);
         inGameUI.SetActive(false);
+        gameOverScreen.SetActive(false);
+        gameWonScreen.SetActive(false);
         p1.SetActive(true);
         p2.SetActive(false);
     }
