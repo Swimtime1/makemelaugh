@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
         rangeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
         meleeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
 
-        Instantiate(grenadePrefab, transform.position, transform.rotation).GetComponent<Grenade>().ThrowGrenade(rangeWeapon.localPosition);
+        // Instantiate(grenadePrefab, transform.position, transform.rotation).GetComponent<Grenade>().ThrowGrenade(rangeWeapon.localPosition);
     }
 
 
