@@ -128,6 +128,7 @@ MonoBehaviour:
   projectileSpeed: 0
   spread: 1
   isAttacking: 0
+  collider: {fileID: 5914907839706622427}
 --- !u!61 &5914907839706622427
 BoxCollider2D:
   m_ObjectHideFlags: 0

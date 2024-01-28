@@ -50,7 +50,9 @@ public class Enemy_Class : MonoBehaviour
             isDead = true;
             animator.SetTrigger("Death");
             rb.velocity = Vector2.zero;
-            weap_and_reap.gameObject.SetActive(false);
+            if(weap_and_reap) {
+                weap_and_reap.gameObject.SetActive(false);
+            }
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
             GetComponent<Collider2D>().enabled = false;
         }
@@ -115,15 +117,22 @@ public class Enemy_Class : MonoBehaviour
         if (maxShootrange > (Vector2.Distance(transform.position, cloest_playereerer.transform.position)) &&
             (Vector2.Distance(transform.position, cloest_playereerer.transform.position) > minShootrange)) {
             
-            weap_and_reap.StartAttack();
+            if(weap_and_reap) {
+        
+                weap_and_reap.StartAttack();
 
-            Vector2 playerDir = cloest_playereerer.transform.position - transform.position;
+                if(weap_and_reap.gameObject == gameObject) { return; }
+                
+                Vector2 playerDir = cloest_playereerer.transform.position - transform.position;
 
-            weap_and_reap.transform.parent.localPosition = playerDir.normalized * 0.75f;
-            weap_and_reap.transform.parent.localRotation = Quaternion.LookRotation(Vector3.forward, playerDir.normalized) * Quaternion.Euler(0, 0, 90);
+                weap_and_reap.transform.parent.localPosition = playerDir.normalized * 0.75f;
+                weap_and_reap.transform.parent.localRotation = Quaternion.LookRotation(Vector3.forward, playerDir.normalized) * Quaternion.Euler(0, 0, 90);
+            }
 
         } else {
-            weap_and_reap.StopAttack();
+            if(weap_and_reap) {
+                weap_and_reap.StopAttack();
+            }
         }
     }
 }
