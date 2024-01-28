@@ -8,12 +8,10 @@ public class Enemy_Class : MonoBehaviour
     private Rigidbody2D rb;
     private int health = 100;
     private int damage = 10;
-    private GameObject player;
+    private GameObject player, player2;
     private Vector2 followVector;
     private enum enemy_type {MeatShield, Bruiser, Rusher, Pistol, Shotgun, Machinegun};
-    private Weapon weap_and_reap = new Weapon();
-
-    private bool Aiden_Crossfield_Mode = false;
+    private Weapon weap_and_reap;
 
     [SerializeField] float minRange = 30;
     [SerializeField] float minRange = 30;
@@ -40,10 +38,13 @@ public class Enemy_Class : MonoBehaviour
     // FixedUpdate works off of physics update not on actual frames, won't slow the game down it just skips frames
     void FixedUpdate()
     {
-        if (rb == null){
-            rb = GetComponent<Rigidbody2D>();
+        if (rb == null){ rb = GetComponent<Rigidbody2D>(); }
+        if(player == null) { 
             player = GameObject.Find("P1");
+            player2 = GameObject.Find("P2");
         }
+
+        
         
         if (max_range < (Vector2.Distance(transform.position, player.transform.position))) {
 
@@ -55,27 +56,20 @@ public class Enemy_Class : MonoBehaviour
             followVector = (player.transform.position - transform.position).normalized * movespeed;
             //debug.Log("Text: " + Vector2.Distance(transform.position, player.transform.position));
             //rb.velocity = followVector;
-        }
-
-        if ((Vector2.Distance(transform.position, player.transform.position) < minRange)) {
+        } else if ((Vector2.Distance(transform.position, player.transform.position) < minRange)) {
 
             // GET FARTHER
 
+        } else {
+            rb.velocity = Vector2.zero;
         }
 
         if (maxShootrange > (Vector2.Distance(transform.position, player.transform.position)) &&
             (Vector2.Distance(transform.position, player.transform.position) > minShootrange)) {
-
-            rb.velocity = Vector2.zero;
             Debug.Log("Shoot");
         }
         else {
-            cry
+            Debug.Log("Stop Shooting")
         }
-
-        if (health <= 0){
-            Debug.Log("Dead");
-        }
-
     }
 }
