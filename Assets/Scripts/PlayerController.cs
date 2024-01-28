@@ -7,7 +7,7 @@ using UnityEngine.InputSystem.Interactions;
 
 public class PlayerController : MonoBehaviour
 {
-    private Vector2 playerMovement;
+    private Vector2 playerMovement, weaponHeading;
     private float moveSpeed = 3;
 
     private Rigidbody2D rigidbody;
@@ -86,12 +86,39 @@ public class PlayerController : MonoBehaviour
 
         //Weapons
         if(playerMovement.magnitude > 0) {
-            meleeWeapon.localScale = new Vector3(sprite.flipX ? -1 : 1, 1, 1);
-            rangeWeapon.localPosition = playerMovement.normalized * 0.75f;
-            rangeWeapon.localRotation = Quaternion.LookRotation(Vector3.forward, playerMovement.normalized) * Quaternion.Euler(0, 0, 90);
-            if(rangeWeapon.localPosition.x != 0) {
-                rangeWeapon.GetChild(0).GetComponent<SpriteRenderer>().flipY = rangeWeapon.localPosition.x < 0;
-            }            
+            meleeWeapon.localScale = new Vector3(sprite.flipX ? -1 : 1, 1, 1);  
+
+            weaponHeading = playerMovement.normalized;        
+        }
+
+        rangeWeapon.localRotation = Quaternion.LookRotation(Vector3.forward, weaponHeading.normalized) * Quaternion.Euler(0, 0, 90);
+        rangeWeapon.localPosition = weaponHeading.normalized * 0.75f;
+        if(rangeWeapon.localPosition.x != 0) {
+            rangeWeapon.GetChild(0).GetComponent<SpriteRenderer>().flipY = rangeWeapon.localPosition.x < 0;
+        }  
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 15, 1 << 9);
+        float bestDist = 15*15;
+        for(int i = 0; i < enemies.Length; i++) {
+            //Is this enemy within a 35 degrees of our current aim?
+            if(Vector2.Angle(weaponHeading.normalized, (enemies[i].transform.position-transform.position).normalized) > 45) { continue; }
+            
+            //Is this enemy closer?
+            if( (transform.position - enemies[i].transform.position).sqrMagnitude > bestDist) { continue; }
+
+            //Could be a good target to aim at, make sure it's not blocked
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (enemies[i].transform.position - transform.position).normalized, 20, 1 << 9 | 1 << 11);
+            //Hit an obstacle, not an enemy
+            if(hit.collider != enemies[i]) { continue; }
+            
+            //Make sure the enemy is actually alive first
+            if(!enemies[i].GetComponent<Enemy_Class>().IsAlive()) { continue; }
+
+            //Current best enemy!
+            bestDist = (transform.position - enemies[i].transform.position).sqrMagnitude;
+
+            rangeWeapon.localRotation = Quaternion.LookRotation(Vector3.forward, (enemies[i].transform.position - transform.position).normalized) * Quaternion.Euler(0, 0, 90);
+            rangeWeapon.localPosition = (enemies[i].transform.position - transform.position).normalized * 0.75f;
         }
 
         if(!performingCartwheel && !isDead) {
@@ -207,14 +234,15 @@ public class PlayerController : MonoBehaviour
         playerMovement = Vector2.zero;
 
         cartwheelSpeed = Vector2.zero;
-        collider.enabled = true;
+        collider.enabled = false;
         cartwheelCooldown = 0;
     }
 
     // Plays the Revival Animation
     public void Revive() {
         isDead = false;
-
         animator.SetTrigger("Revival");
+
+        collider.enabled = true;
     }
 }
