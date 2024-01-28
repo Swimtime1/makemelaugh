@@ -51,16 +51,6 @@ public class Weapon : MonoBehaviour {
         animator.SetTrigger("OneShotAttack");
 
         cooldown = useSpeed;
-
-        if(isRange && projectilePrefab != null) {
-            for(int i = -spread / 2; i <= spread / 2; i++) {
-                print(i);
-                GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, i*10));
-            }
-
-        } else if(!isRange) {
-
-        }
     }
 
     public void StartAttack() {
@@ -87,5 +77,13 @@ public class Weapon : MonoBehaviour {
 
     public void DisableHurtbox() {
         collider.enabled = false;
+    }
+
+    public void Shoot() {
+        if(isRange && projectilePrefab != null) {
+            for(int i = -spread / 2; i <= spread / 2; i++) {
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90) * Quaternion.Euler(0, 0, i*10));
+            }
+        }
     }
 }
