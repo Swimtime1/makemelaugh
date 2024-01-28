@@ -27,7 +27,9 @@ public class Projectile : MonoBehaviour
         bulletSpeed = speed;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision) {            
+    public void OnTriggerEnter2D(Collider2D collision) {     
+        if(collision.isTrigger) { return; }
+    
         PlayerController player = collision.transform.gameObject.GetComponent<PlayerController>();
         Enemy_Class enemy = collision.transform.gameObject.GetComponent<Enemy_Class>();
 
