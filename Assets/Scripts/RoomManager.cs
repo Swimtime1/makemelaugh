@@ -15,8 +15,8 @@ public class RoomManager : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++) {
             //Killed all enemies
             bool killedAll = true;
-            for(int j = 0; j < transform.GetChild(i).childCount; j++) {
-                if(transform.GetChild(i).GetChild(j).GetComponent<Enemy_Class>().IsAlive()) {
+            for(int j = 0; j < transform.GetChild(i).GetChild(0).childCount; j++) {
+                if((bool) transform.GetChild(i).GetChild(0).GetChild(j).GetComponent<Enemy_Class>()?.IsAlive()) {
                     return;
                 }
             }

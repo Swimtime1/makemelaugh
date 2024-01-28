@@ -14,7 +14,9 @@ public class EnemySpawner : MonoBehaviour
                 GameObject.Find("P2").transform.position = col.transform.position;
             }
 
-            transform.parent.GetChild(transform.GetSiblingIndex()-1).GetComponent<Collider2D>().isTrigger = false;
+            if(transform.GetSiblingIndex() > 0) {
+                transform.parent.GetChild(transform.GetSiblingIndex()-1).GetComponent<Collider2D>().isTrigger = false;
+            }
             transform.GetChild(0).gameObject.SetActive(true);
         }
     }
