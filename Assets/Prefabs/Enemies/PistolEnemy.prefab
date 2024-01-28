@@ -101,13 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef17fb97b9efd1e4abefe74519d0baa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   weap_and_reap: {fileID: 0}
-  minRange: 30
-  maxRange: 30
-  minShootrange: 30
-  maxShootrange: 30
-  laughEffect: {fileID: 0}
+  minRange: 3
+  maxRange: 5
+  minShootrange: 2
+  maxShootrange: 7
+  laughEffect: {fileID: 438761568043851178, guid: 035a3c0d099710341a4fced0bdba2238, type: 3}
 --- !u!114 &8930724833078904503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &6019948994138032975
 BoxCollider2D:
   m_ObjectHideFlags: 0
