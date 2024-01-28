@@ -131,11 +131,7 @@ public class PlayerController : MonoBehaviour
 
         if(cartwheelCooldown > 0) { return; }
 
-        cartwheelSpeed = Vector2.zero;
-
-        if(playerMovement.magnitude > 0) {
-            cartwheelSpeed = playerMovement.normalized * 6;
-        }
+        cartwheelSpeed = playerMovement.normalized * 6;
 
         cartwheelCooldown = CARTWHEEL_COOLDOWN_TIMER;
 
