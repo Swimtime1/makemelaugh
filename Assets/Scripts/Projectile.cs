@@ -27,12 +27,17 @@ public class Projectile : MonoBehaviour
         bulletSpeed = speed;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision) {            
-        Instantiate(explosion, transform.position, transform.rotation);
+    public void OnTriggerEnter2D(Collider2D collision) {            
+        PlayerController player = collision.transform.gameObject.GetComponent<PlayerController>();
+        Enemy_Class enemy = collision.transform.gameObject.GetComponent<Enemy_Class>();
 
-        collision.transform.gameObject.GetComponent<PlayerController>()?.Hit(bulletDamage);
-        
-        // collision.transform.gameObject.GetComponent<Enemy_Class>()?.Hit(bulletDamage);
+        if(player) {
+            player.Hit(bulletDamage);
+        } else if (enemy) {
+            enemy.Hit(bulletDamage);
+        } else {
+            Instantiate(explosion, transform.position, transform.rotation);
+        }
 
         Destroy(gameObject);
 
