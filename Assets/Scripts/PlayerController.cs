@@ -78,8 +78,11 @@ public class PlayerController : MonoBehaviour
         //Weapons
         if(playerMovement.magnitude > 0) {
             meleeWeapon.localScale = new Vector3(sprite.flipX ? -1 : 1, 1, 1);
-            rangeWeapon.localPosition = playerMovement.normalized * 0.5f;
+            rangeWeapon.localPosition = playerMovement.normalized * 0.75f;
             rangeWeapon.localRotation = Quaternion.LookRotation(Vector3.forward, playerMovement.normalized) * Quaternion.Euler(0, 0, 90);
+            if(rangeWeapon.localPosition.x != 0) {
+                rangeWeapon.GetChild(0).GetComponent<SpriteRenderer>().flipY = rangeWeapon.localPosition.x < 0;
+            }            
         }
 
         if(!performingCartwheel && !isDead) {
