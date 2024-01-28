@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2462172046181242385}
   - component: {fileID: 2352203197054774016}
   - component: {fileID: 2742125399894573387}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PipeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1664
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

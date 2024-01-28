@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1096980833077570877}
   - component: {fileID: 784323391576601385}
   - component: {fileID: 5917044762720085607}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShotgunEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1664
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
