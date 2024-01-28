@@ -47,3 +47,9 @@ TagManager:
   - name: Playable Area
     uniqueID: 4260879049
     locked: 0
+  - name: People
+    uniqueID: 3564083219
+    locked: 0
+  - name: Weapons
+    uniqueID: 1695677597
+    locked: 0
