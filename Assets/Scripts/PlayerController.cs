@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        
         weapons = transform.GetChild(0);
         meleeWeapon = weapons.GetChild(0);
         rangeWeapon = weapons.GetChild(1);
@@ -140,15 +141,33 @@ public class PlayerController : MonoBehaviour
 
     public void AttackAction(InputAction.CallbackContext obj) {
         if(obj.canceled) {
-            //Stop attacking
+            rangeWeapon.GetChild(0)?.GetComponent<Weapon>().StopAttack();
+            meleeWeapon.GetChild(0)?.GetComponent<Weapon>().StopAttack();
         }
         
         if(!weapons.gameObject.activeSelf) { return; }
 
         if(obj.started) {
-            //Start attacking
+            if(rangeWeapon.gameObject.activeSelf) {
+                rangeWeapon.GetChild(0)?.GetComponent<Weapon>().StartAttack();
+            }
+
+            if(meleeWeapon.gameObject.activeSelf) {
+                meleeWeapon.GetChild(0)?.GetComponent<Weapon>().StartAttack();
+            }
         }
     }
+
+    public void SwitchWeapon(InputAction.CallbackContext obj) {
+        if(!obj.started) { return; }
+
+        rangeWeapon.GetChild(0)?.GetComponent<Weapon>().StopAttack();
+        meleeWeapon.GetChild(0)?.GetComponent<Weapon>().StopAttack();
+
+        rangeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
+        meleeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
+    }
+
 
     public void Hit(float damage) {
         health -= damage;

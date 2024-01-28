@@ -32,9 +32,7 @@ public class Projectile : MonoBehaviour
 
         collision.transform.gameObject.GetComponent<PlayerController>()?.Hit(bulletDamage);
         
-        if(collision.transform.gameObject.GetComponent<Enemy_Class>()) {
-            // Destroy(collision.transform.gameObject);
-        }
+        // collision.transform.gameObject.GetComponent<Enemy_Class>()?.Hit(bulletDamage);
 
         Destroy(gameObject);
 
