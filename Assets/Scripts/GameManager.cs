@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Types out how p1 shoots, one letter at a time
-        text = "How To Shoot";
+        text = "How To Battle\nZ - Attack\nX - Dodge\nC - Switch Weapons";
         foreach (char i in text) 
         {
             yield return new WaitForSeconds(0.1f);
@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Types out how p2 shoots, one letter at a time
-        text = "How To Shoot";
+        text = "How To Battle\nB - Attack\nN - Dodge\nM - Switch Weapons";
         foreach (char i in text) 
         {
             yield return new WaitForSeconds(0.1f);
