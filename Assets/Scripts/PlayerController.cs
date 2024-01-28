@@ -262,4 +262,8 @@ public class PlayerController : MonoBehaviour
     public int GetGrenades() {
         return this.numGrenades;
     }
+
+    public bool IsAlive() {
+        return !isDead;
+    }
 }
