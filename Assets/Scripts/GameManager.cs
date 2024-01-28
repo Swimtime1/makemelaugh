@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // GameObject Variables
     public GameObject gameOverScreen, gameWonScreen;
     public GameObject startScreen, inGameUI, tutorial;
-    public GameObject p1, p2;
+    public GameObject p1, p2, p1GameOver, p2GameOver;
     public GameObject p1Tutorial, p2Tutorial;
     public GameObject p1Grenades, p2Grenades;
     public GameObject ground;
@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
         p1.SetActive(false);
         p2.SetActive(false);
         ground.SetActive(false);
+        p1GameOver.SetActive(true);
+        p2GameOver.SetActive(false);
 
         titleAudio.Play();
 
@@ -118,6 +120,7 @@ public class GameManager : MonoBehaviour
     {
         twoPlayer = false;
         p1.transform.position = new Vector3(0f, -4.43f, 0f);
+        p1GameOver.transform.position = new Vector3(0f, -4.43f, 0f);
         OpenTutorial();
     }
 
@@ -127,6 +130,9 @@ public class GameManager : MonoBehaviour
         twoPlayer = true;
         p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
         p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
+        p1GameOver.transform.position = new Vector3(-1.03f, -4.43f, 0f);
+        p2GameOver.transform.position = new Vector3(1.03f, -4.43f, 0f);
+        
         OpenTutorial();
     }
 
@@ -244,5 +250,32 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             contText.text += i;
         }
+    }
+
+    // Opens the Game Over Screen
+    public void OpenGameOver()
+    {
+        // Determines whether to display information for another player
+        if(twoPlayer)
+        {
+            float xPos1 = p1GameOver.transform.position.x;
+            float yPos1 = p1GameOver.transform.position.y;
+            
+            float xPos2 = p2GameOver.transform.position.x;
+            float yPos2 = p2GameOver.transform.position.y;
+            
+            p1GameOver.transform.position = new Vector3(xPos1, yPos1, 0f);
+            p2GameOver.transform.position = new Vector3(xPos2, yPos2, 0f);
+        }
+        else
+        {
+            float xPos = (p1GameOver.transform.position.x + p2GameOver.transform.position.x) / 2;
+            float yPos = p1GameOver.transform.position.y;
+            
+            p1GameOver.transform.position = new Vector3(xPos, yPos, 0f);
+            p2GameOver.SetActive(false);
+        }
+
+        gameOverScreen.SetActive(true);
     }
 }
