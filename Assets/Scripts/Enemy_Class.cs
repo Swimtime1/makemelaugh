@@ -29,6 +29,10 @@ public class Enemy_Class : MonoBehaviour
 
     // Update is called once per frame
 
+    public bool IsAlive() {
+        return !isDead;
+    }
+
     public void Hit(float damage){
         if(isDead) { return; }
 
@@ -48,6 +52,7 @@ public class Enemy_Class : MonoBehaviour
             rb.velocity = Vector2.zero;
             weap_and_reap.gameObject.SetActive(false);
             rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            GetComponent<Collider2D>().enabled = false;
         }
     }
 
