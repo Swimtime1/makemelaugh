@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // GameObject Variables
     public GameObject gameOverScreen, gameWonScreen;
     public GameObject startScreen, inGameUI, tutorial;
-    public GameObject p1, p2, health1, health2;
+    public GameObject p1, p2;
     public GameObject p1Tutorial, p2Tutorial;
     public GameObject ground;
 
@@ -52,8 +52,6 @@ public class GameManager : MonoBehaviour
         p1.SetActive(false);
         p2.SetActive(false);
         ground.SetActive(false);
-        health1.SetActive(true);
-        health2.SetActive(false);
 
         titleAudio.Play();
 
@@ -110,7 +108,6 @@ public class GameManager : MonoBehaviour
     public void SetMulti()
     {
         twoPlayer = true;
-        health2.SetActive(true);
         p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
         p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
         OpenTutorial();
