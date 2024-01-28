@@ -14,15 +14,18 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(p1 == null) { p1 = GameObject.Find("P1").GetComponent<PlayerController>(); }
-        if(p2 == null) { p2 = GameObject.Find("P2").GetComponent<PlayerController>(); }
+        if(p1 == null) { p1 = GameObject.Find("P1")?.GetComponent<PlayerController>(); }
+        if(p2 == null) { p2 = GameObject.Find("P2")?.GetComponent<PlayerController>(); }
 
         if(p1 && p1.IsAlive() && p2 && p2.IsAlive()) {
             transform.position = (p1.transform.position + p2.transform.position) * 0.5f;
+            transform.position += Vector3.forward * -10;
         } else if(p1 && p1.IsAlive()) {
             transform.position = p1.transform.position;
+            transform.position += Vector3.forward * -10;
         } else if (p2 && p2.IsAlive()) {
             transform.position = p2.transform.position;
+            transform.position += Vector3.forward * -10;
         }
     }
 }
