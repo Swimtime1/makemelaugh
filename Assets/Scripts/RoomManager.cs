@@ -14,11 +14,15 @@ public class RoomManager : MonoBehaviour
     void Update() {
         for(int i = 0; i < transform.childCount; i++) {
             //Killed all enemies
-            if(transform.GetChild(i).GetChild(0).childCount == 0) {
-                if(i < transform.childCount - 1) {
-                    //Next room can be allowed
-                    transform.GetChild(i+1).GetComponent<Collider2D>().isTrigger = true;
+            bool killedAll = true;
+            for(int j = 0; j < transform.GetChild(i).childCount; j++) {
+                if(transform.GetChild(i).GetChild(j).GetComponent<Enemy_Class>().IsAlive()) {
+                    return;
                 }
+            }
+            if(i < transform.childCount - 1) {
+                //Next room can be allowed
+                transform.GetChild(i+1).GetComponent<Collider2D>().isTrigger = true;
             }
         }
     }
