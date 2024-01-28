@@ -14,7 +14,7 @@ public class Enemy_Class : MonoBehaviour
     private Weapon weap_and_reap;
 
     [SerializeField] float minRange = 30;
-    [SerializeField] float minRange = 30;
+    [SerializeField] float maxRange = 30;
     [SerializeField] float minShootrange = 30;
     [SerializeField] float maxShootrange = 30;
 
@@ -46,7 +46,7 @@ public class Enemy_Class : MonoBehaviour
 
         
         
-        if (max_range < (Vector2.Distance(transform.position, player.transform.position))) {
+        if (maxRange < (Vector2.Distance(transform.position, player.transform.position))) {
 
             // GET CLOSER
 
@@ -69,7 +69,7 @@ public class Enemy_Class : MonoBehaviour
             Debug.Log("Shoot");
         }
         else {
-            Debug.Log("Stop Shooting")
+            Debug.Log("Stop Shooting");
         }
     }
 }
