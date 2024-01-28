@@ -19,16 +19,6 @@ public class Weapon : MonoBehaviour {
 
     private Collider2D collider;
 
-    // Start is called before the first frame update
-    void Start() {
-        if(projectilePrefab != null) {
-            projectilePrefab.GetComponent<Projectile>().Initialize(damage, projectileSpeed);
-        }
-
-        animator = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
-    }
-
     void Update() {
         if(animator == null) { animator = GetComponent<Animator>(); }
         if(collider == null) { collider = GetComponent<Collider2D>(); }
@@ -68,6 +58,9 @@ public class Weapon : MonoBehaviour {
         if(isRange) { return; }
 
         //If melee, deal damage
+        collision.transform.gameObject.GetComponent<PlayerController>()?.Hit(damage);
+        
+        collision.transform.gameObject.GetComponent<Enemy_Class>()?.Hit(damage);
     }
 
     public void EnableHurtbox() {
@@ -82,6 +75,7 @@ public class Weapon : MonoBehaviour {
         if(isRange && projectilePrefab != null) {
             for(int i = -spread / 2; i <= spread / 2; i++) {
                 GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, -90) * Quaternion.Euler(0, 0, i*10));
+                projectile.GetComponent<Projectile>().Initialize(damage, projectileSpeed);
             }
         }
     }

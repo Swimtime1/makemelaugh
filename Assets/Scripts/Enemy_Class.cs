@@ -6,8 +6,12 @@ using UnityEngine;
 public class Enemy_Class : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private int health = 100;
-    private int damage = 10;
+    private MovementController2D movementController;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    private bool isDead = false;
+    public float health = 100;
     private GameObject player, player2;
     private Vector2 followVector;
     private enum enemy_type {MeatShield, Bruiser, Rusher, Pistol, Shotgun, Machinegun};
@@ -19,30 +23,46 @@ public class Enemy_Class : MonoBehaviour
     [SerializeField] float minShootrange = 30;
     [SerializeField] float maxShootrange = 30;
 
-    [SerializeField] float movespeed = 3;
+    [SerializeField] GameObject laughEffect;
 
-    private MovementController2D movementController;
-
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-        
-    }   
+    float laughTimer;
 
     // Update is called once per frame
 
-    void hit(int Damage){
-        health -= Damage;
+    public void Hit(float damage){
+        if(isDead) { return; }
+
+        health -= damage;
+
+        if(laughTimer <= 0) {
+            for(int i = 0; i < Mathf.Clamp(damage / 5, 1, 5); i++) {
+                GameObject laugh = Instantiate(laughEffect, transform.position, Quaternion.Euler(-90, 0, 0));
+                laugh.transform.localScale = Vector3.one * Mathf.Clamp(damage / 20, 0.35f, 0.75f);
+            }
+            laughTimer = 0.15f;
+        }
+
+        if(health <= 0) {
+            isDead = true;
+            animator.SetTrigger("Death");
+            rb.velocity = Vector2.zero;
+            weap_and_reap.gameObject.SetActive(false);
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 
+    void Update() {
+        laughTimer -= Time.deltaTime;
+        if(laughTimer < 0) {
+            laughTimer = 0;
+        }
+    }
 
     // FixedUpdate works off of physics update not on actual frames, won't slow the game down it just skips frames
     void FixedUpdate()
     {
+        if(isDead) { return; }
+
         if (movementController == null) { movementController = GetComponent<MovementController2D>(); }
         if (animator == null) { animator = GetComponent<Animator>(); }
         if (rb == null) { rb = GetComponent<Rigidbody2D>(); }

@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     public GameObject grenadePrefab;
 
     Transform weapons, meleeWeapon, rangeWeapon;
+
+    public GameObject clownBlood;
+
+    private float hitTimer;
     
     void Start() {
         collider = GetComponent<Collider2D>();
@@ -53,6 +57,11 @@ public class PlayerController : MonoBehaviour
         if(meleeWeapon == null) { meleeWeapon = weapons.GetChild(0); }
         if(rangeWeapon == null) { rangeWeapon = weapons.GetChild(1); }
 
+
+        hitTimer -= Time.deltaTime;
+        if(hitTimer < 0) {
+            hitTimer = 0;
+        }
 
         //Cartwheel
         performingCartwheel = cartwheelCooldown > CARTWHEEL_COOLDOWN_TIMER - 0.5f;
@@ -95,7 +104,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("FaceScreen", movingUp);
             animator.SetBool("IsRunning", playerMovement.magnitude != 0f);
             animator.SetBool("IsCartwheeling", performingCartwheel);
-            animator.SetBool("IsDead", isDead);
         }
     }
 
@@ -173,14 +181,28 @@ public class PlayerController : MonoBehaviour
 
 
     public void Hit(float damage) {
+        if(isDead) { return; }
+
         health -= damage;
+
+        if(hitTimer <= 0) {
+            for(int i = 0; i < Mathf.Clamp(damage / 5, 1, 5); i++) {
+                GameObject blood = Instantiate(clownBlood, transform.position, Quaternion.Euler(-90, 0, 0));
+                blood.transform.localScale = Vector3.one * Mathf.Clamp(damage / 3, 0.75f, 1.15f);
+            }
+            hitTimer = 0.15f;
+        }
+
+        if(health <= 0) {
+            Death();
+        }
     }
 
     // Plays the Death Animations
     public void Death() {
-        isDead = true;
-        
+        isDead = true; 
 
+        animator.SetTrigger("Death");
 
         playerMovement = Vector2.zero;
 
@@ -192,5 +214,7 @@ public class PlayerController : MonoBehaviour
     // Plays the Revival Animation
     public void Revive() {
         isDead = false;
+
+        animator.SetTrigger("Revival");
     }
 }
