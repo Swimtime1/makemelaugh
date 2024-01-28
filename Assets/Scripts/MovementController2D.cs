@@ -20,7 +20,6 @@ public class MovementController2D : MonoBehaviour
     Vector2 targetNode; //target in 2D space
     List <Vector2> path;
     List<Vector2> pathLeftToGo= new List<Vector2>();
-    [SerializeField] bool drawDebugLines;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
@@ -34,11 +33,6 @@ public class MovementController2D : MonoBehaviour
     {
         if (rb == null) { rb = GetComponent<Rigidbody2D>(); } 
 
-        if (Input.GetMouseButtonDown(0)) //check for a new target
-        {
-            GetMoveCommand(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-
         if (pathLeftToGo.Count > 0) //if the target is not yet reached
         {
             Vector3 dir =  (Vector3)pathLeftToGo[0]-transform.position ;
@@ -50,18 +44,10 @@ public class MovementController2D : MonoBehaviour
                 pathLeftToGo.RemoveAt(0);
             }
         }
-
-        if (drawDebugLines)
-        {
-            for (int i=0;i<pathLeftToGo.Count-1;i++) //visualize your path in the sceneview
-            {
-                Debug.DrawLine(pathLeftToGo[i], pathLeftToGo[i+1]);
-            }
-        }
     }
 
     
-    void GetMoveCommand(Vector2 target)
+    public void GetMoveCommand(Vector2 target)
     {
         Vector2 closestNode = GetClosestNode(transform.position);
         if (pathfinder.GenerateAstarPath(closestNode, GetClosestNode(target), out path)) //Generate path between two points on grid that are close to the transform position and the assigned target.
