@@ -245,4 +245,9 @@ public class PlayerController : MonoBehaviour
 
         collider.enabled = true;
     }
+
+    // Returns the Player's health
+    public float GetHealth() {
+        return this.health;
+    }
 }

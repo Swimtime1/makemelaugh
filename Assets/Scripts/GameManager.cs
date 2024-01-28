@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // GameObject Variables
     public GameObject gameOverScreen, gameWonScreen;
     public GameObject startScreen, inGameUI, tutorial;
-    public GameObject p1, p2;
+    public GameObject p1, p2, health1, health2;
     public GameObject p1Tutorial, p2Tutorial;
     public GameObject ground;
 
@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
 
     // AudioClip Variables
     public AudioClip heehaha;
+
+    // Slider Variables
+    public Slider healthBar1, healthBar2;
+
+    // PlayerController Variables
+    public PlayerController p1Script, p2Script;
     
     // Start is called before the first frame update
     void Start()
@@ -46,6 +52,8 @@ public class GameManager : MonoBehaviour
         p1.SetActive(false);
         p2.SetActive(false);
         ground.SetActive(false);
+        health1.SetActive(true);
+        health2.SetActive(false);
 
         titleAudio.Play();
 
@@ -85,6 +93,9 @@ public class GameManager : MonoBehaviour
             startActive = false;
             StartGame();
         }
+
+        healthBar1.value = (player1Script.GetHealth() / 100f);
+        healthBar2.value = (player2Script.GetHealth() / 100f);
     }
 
     // Sets the Game Mode to Single Player
@@ -99,6 +110,7 @@ public class GameManager : MonoBehaviour
     public void SetMulti()
     {
         twoPlayer = true;
+        health2.SetActive(true);
         p1.transform.position = new Vector3(-1.03f, -4.43f, 0f);
         p2.transform.position = new Vector3(1.03f, -4.43f, 0f);
         OpenTutorial();
