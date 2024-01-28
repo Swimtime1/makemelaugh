@@ -17,10 +17,13 @@ public class GameManager : MonoBehaviour
     public GameObject startScreen, inGameUI, tutorial;
     public GameObject p1, p2;
     public GameObject p1Tutorial, p2Tutorial;
+    public GameObject p1Grenades, p2Grenades;
     public GameObject ground;
 
     // TextMeshProUGUI Variables
-    public TextMeshProUGUI contText, p1Move, p1Shoot, p1Title, p2Move, p2Shoot, p2Title;
+    public TextMeshProUGUI contText;
+    public TextMeshProUGUI p1Move, p1Title, p1Shoot, p1NumGrenades;
+    public TextMeshProUGUI p2Move, p2Title, p2Shoot, p2NumGrenades;
 
     // Script Variables
     public PlayerController player1Script, player2Script;
@@ -94,6 +97,20 @@ public class GameManager : MonoBehaviour
 
         healthBar1.value = (player1Script.GetHealth() / 100f);
         healthBar2.value = (player2Script.GetHealth() / 100f);
+
+        // Updates the UI for how many grenades each player has
+        if(player1Script.GetGrenades() > 0)
+        {
+            p1Grenades.SetActive(true);
+            p1NumGrenades.text = "x " + player1Script.GetGrenades();
+        }
+        else { p1Grenades.SetActive(false); }
+        if(player2Script.GetGrenades() > 0)
+        {
+            p2Grenades.SetActive(true);
+            p2NumGrenades.text = "x " + player2Script.GetGrenades();
+        }
+        else { p2Grenades.SetActive(false); }
     }
 
     // Sets the Game Mode to Single Player

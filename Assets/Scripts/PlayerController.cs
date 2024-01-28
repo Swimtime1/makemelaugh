@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     public GameObject clownBlood;
 
     private float hitTimer;
+
+    private int numGrenades;
     
     void Start() {
         collider = GetComponent<Collider2D>();
@@ -46,6 +48,8 @@ public class PlayerController : MonoBehaviour
         weapons = transform.GetChild(0);
         meleeWeapon = weapons.GetChild(0);
         rangeWeapon = weapons.GetChild(1);
+
+        numGrenades = 0;
     }
 
     void Update() {
@@ -132,6 +136,9 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("IsRunning", playerMovement.magnitude != 0f);
             animator.SetBool("IsCartwheeling", performingCartwheel);
         }
+
+        // Caps the number of grenades the Player can have at 5
+        if(numGrenades > 5) { numGrenades = 5; }
     }
 
     void FixedUpdate() {
@@ -249,5 +256,10 @@ public class PlayerController : MonoBehaviour
     // Returns the Player's health
     public float GetHealth() {
         return this.health;
+    }
+
+    // Returns the number of grenades the Player has
+    public int GetGrenades() {
+        return this.numGrenades;
     }
 }
