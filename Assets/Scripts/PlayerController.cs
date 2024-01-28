@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource movement, soundFX;
     public AudioClip step, cartwheelSFX, ballonSwing;
 
+    public GameObject grenadePrefab;
+
     Transform weapons, meleeWeapon, rangeWeapon;
     
     void Start() {
@@ -166,6 +168,8 @@ public class PlayerController : MonoBehaviour
 
         rangeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
         meleeWeapon.gameObject.SetActive(!rangeWeapon.gameObject.activeSelf);
+
+        Instantiate(grenadePrefab, transform.position, transform.rotation).GetComponent<Grenade>().ThrowGrenade(rangeWeapon.localPosition);
     }
 
 
