@@ -16,22 +16,18 @@ public class Projectile : MonoBehaviour
         GetComponent<Rigidbody2D>().AddTorque(rotationSpeed, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
-    void Update() {
-        
-    }
-
     public void Initialize(float damage, float speed) {
         bulletDamage = damage;
         bulletSpeed = speed;
     }
 
     public void OnCollisionEnter2D(Collision2D collision) {            
-        //Make explosion effect
         Instantiate(explosion, transform.position, transform.rotation);
 
-        if(collision.transform.gameObject.GetComponent<Projectile>()) {
-            Destroy(collision.transform.gameObject);
+        collision.transform.gameObject.GetComponent<PlayerController>()?.Hit(bulletDamage);
+        
+        if(collision.transform.gameObject.GetComponent<Enemy_Class>()) {
+            // Destroy(collision.transform.gameObject);
         }
 
         Destroy(gameObject);
