@@ -20254,7 +20254,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1610037833}
-  m_Father: {fileID: 1814765654}
+  m_Father: {fileID: 2092680789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1515379123
 BoxCollider2D:
@@ -20854,7 +20854,6 @@ Transform:
   - {fileID: 1967830668}
   - {fileID: 756500359}
   - {fileID: 209208397}
-  - {fileID: 1515379122}
   m_Father: {fileID: 1642914219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1817843552
@@ -21714,6 +21713,7 @@ Transform:
   m_Children:
   - {fileID: 343553239}
   - {fileID: 1642914219}
+  - {fileID: 1515379122}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2092680790
