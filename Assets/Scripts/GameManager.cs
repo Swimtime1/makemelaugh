@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
 
     // PlayerController Variables
     public PlayerController p1Script, p2Script;
+
+    // SpawnManager Variables
+    public SpawnManager enemSpawn;
     
     // Start is called before the first frame update
     void Start()
@@ -85,6 +88,8 @@ public class GameManager : MonoBehaviour
 
         titleAudio.Stop();
         mainAudio.Play();
+
+        enemSpawn.StartSpawn();
     }
 
     // Update is called once per frame
