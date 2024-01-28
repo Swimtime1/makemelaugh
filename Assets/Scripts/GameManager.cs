@@ -118,6 +118,16 @@ public class GameManager : MonoBehaviour
             p2NumGrenades.text = "x " + player2Script.GetGrenades();
         }
         else { p2Grenades.SetActive(false); }
+
+        // Game Over
+        if(player1Script.GetHealth() <= 0)
+        {
+            if(twoPlayer)
+            {
+                if(player2Script.GetHealth() <= 0) { OpenGameOver(); }
+            }
+            else { OpenGameOver(); }
+        }
     }
 
     // Sets the Game Mode to Single Player
