@@ -34,7 +34,7 @@ public class Enemy_Class : MonoBehaviour
     }
 
     public void Hit(float damage){
-        if(isDead) { return; }
+        if(isDead) { Destroy(this.gameObject); }
 
         health -= damage;
 
