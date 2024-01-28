@@ -5,6 +5,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public GameObject explosion;
+    public List<Sprite> sprites;
+
+    SpriteRenderer spriteRenderer;
 
     float bulletDamage;
     public float bulletSpeed;
@@ -12,6 +15,9 @@ public class Projectile : MonoBehaviour
     public float rotationSpeed;
 
     void Awake() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Count)];
+
         GetComponent<Rigidbody2D>().velocity = bulletSpeed * transform.up;
         GetComponent<Rigidbody2D>().AddTorque(rotationSpeed, ForceMode2D.Impulse);
     }
