@@ -32,7 +32,6 @@ public class Weapon : MonoBehaviour {
     void Update() {
         if(animator == null) { animator = GetComponent<Animator>(); }
         if(collider == null) { collider = GetComponent<Collider2D>(); }
-
     }
 
     void FixedUpdate() {
