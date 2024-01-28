@@ -17,11 +17,11 @@ public class Weapon : MonoBehaviour {
 
     private Animator animator;
 
-    private Collider2D collider;
+    public Collider2D collider;
+    public Animator parentAnimator;
 
     void Update() {
         if(animator == null) { animator = GetComponent<Animator>(); }
-        if(collider == null) { collider = GetComponent<Collider2D>(); }
     }
 
     void FixedUpdate() {
@@ -38,6 +38,11 @@ public class Weapon : MonoBehaviour {
 
     void DoAttack() {
         animator.SetTrigger("OneShotAttack");
+        animator.SetTrigger("Attack");
+
+        if(parentAnimator) {
+            parentAnimator.SetTrigger("Attack");
+        }
 
         cooldown = useSpeed;
     }
