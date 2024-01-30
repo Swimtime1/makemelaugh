@@ -12,7 +12,7 @@ public class Enemy_Class : MonoBehaviour
 
     private bool isDead = false;
     public float health = 100;
-    private GameObject player, player2;
+    private PlayerController player, player2;
     private Vector2 followVector;
     private enum enemy_type {MeatShield, Bruiser, Rusher, Pistol, Shotgun, Machinegun};
     
@@ -76,18 +76,30 @@ public class Enemy_Class : MonoBehaviour
         if (spriteRenderer == null) { spriteRenderer = GetComponent<SpriteRenderer>(); }
 
         if(player == null) { 
-            player = GameObject.Find("P1");
-            player2 = GameObject.Find("P2");
+            player = GameObject.Find("P1").GetComponent<PlayerController>();
+            player2 = GameObject.Find("P2").GetComponent<PlayerController>();;
         }
 
         if(player == null) {
             return;
         }
 
-        GameObject cloest_playereerer = player2;
+        PlayerController cloest_playereerer;
 
-        if (player2 == null || Vector2.Distance(transform.position, player.transform.position) < Vector2.Distance(transform.position, player2.transform.position)     ){
+        if (player2 == null){
             cloest_playereerer = player;
+        } else {
+            if(!player.IsAlive()) {
+                cloest_playereerer = player2;
+            } else if(!player2.IsAlive()) {
+                cloest_playereerer = player;
+            } else {
+                if(Vector2.Distance(transform.position, player.transform.position) < Vector2.Distance(transform.position, player2.transform.position)) {
+                    cloest_playereerer = player;
+                } else {
+                    cloest_playereerer = player2;
+                }
+            }
         }
         
         
