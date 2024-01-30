@@ -166,7 +166,7 @@ MonoBehaviour:
   stoppingDistance: 0.05
   obstacles:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 0
   searchShortcut: 0
   snapToGrid: 0
 --- !u!114 &1631240197276107022
@@ -381,3 +381,5 @@ MonoBehaviour:
   projectileSpeed: 8
   spread: 1
   isAttacking: 0
+  collider: {fileID: 0}
+  parentAnimator: {fileID: 0}

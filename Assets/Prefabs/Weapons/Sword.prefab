@@ -129,6 +129,7 @@ MonoBehaviour:
   spread: 1
   isAttacking: 0
   collider: {fileID: 5914907839706622427}
+  parentAnimator: {fileID: 0}
 --- !u!61 &5914907839706622427
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1408
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

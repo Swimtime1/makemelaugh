@@ -80,8 +80,10 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.identity;
         } 
 
-        if (!cartwheelInvinciblityActive && !collider.enabled) {
-            collider.enabled = true;
+        if (!cartwheelInvinciblityActive && !isDead) {
+            collider.excludeLayers = 1 << 7 | 1 << 8 | 1 << 9;
+        } else {
+            collider.excludeLayers = 1 << 7 | 1 << 8 | 1 << 9 | 1 << 10;
         }
 
         if(cartwheelCooldown < 0) {
@@ -177,8 +179,6 @@ public class PlayerController : MonoBehaviour
 
         cartwheelCooldown = CARTWHEEL_COOLDOWN_TIMER;
 
-        collider.enabled = false;
-
         soundFX.PlayOneShot(cartwheelSFX);
     }
 
@@ -241,7 +241,6 @@ public class PlayerController : MonoBehaviour
         playerMovement = Vector2.zero;
 
         cartwheelSpeed = Vector2.zero;
-        collider.enabled = false;
         cartwheelCooldown = 0;
     }
 
@@ -249,8 +248,6 @@ public class PlayerController : MonoBehaviour
     public void Revive() {
         isDead = false;
         animator.SetTrigger("Revival");
-
-        collider.enabled = true;
     }
 
     // Returns the Player's health
