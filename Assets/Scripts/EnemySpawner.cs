@@ -7,10 +7,10 @@ public class EnemySpawner : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if(col.transform.GetComponent<PlayerController>() != null) {
             //Move both players to that position
-            if(GameObject.Find("P1")) {
+            if(GameObject.Find("P1") && GameObject.Find("P1").GetComponent<PlayerController>().IsAlive()) {
                 GameObject.Find("P1").transform.position = col.transform.position;
             }
-            if(GameObject.Find("P2")) {
+            if(GameObject.Find("P2") && GameObject.Find("P2").GetComponent<PlayerController>().IsAlive()) {
                 GameObject.Find("P2").transform.position = col.transform.position;
             }
 
