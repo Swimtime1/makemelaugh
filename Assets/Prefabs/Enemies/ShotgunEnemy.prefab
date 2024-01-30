@@ -316,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074411443775740229, guid: 21ac73b7871da3c4584ad9f1df53324b, type: 3}
       propertyPath: damage
-      value: 13
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5074411443775740229, guid: 21ac73b7871da3c4584ad9f1df53324b, type: 3}
       propertyPath: spread
@@ -328,7 +328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5074411443775740229, guid: 21ac73b7871da3c4584ad9f1df53324b, type: 3}
       propertyPath: useSpeed
-      value: 0.9
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 5074411443775740229, guid: 21ac73b7871da3c4584ad9f1df53324b, type: 3}
       propertyPath: parentAnimator
