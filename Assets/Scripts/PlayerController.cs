@@ -101,12 +101,12 @@ public class PlayerController : MonoBehaviour
         rangeWeapon.localPosition = weaponHeading.normalized * 0.75f;
         if(rangeWeapon.localPosition.x != 0) {
             rangeWeapon.GetChild(0).GetComponent<SpriteRenderer>().flipY = rangeWeapon.localPosition.x < 0;
-        }  
+        }
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 15, 1 << 9);
         float bestDist = 15*15;
         for(int i = 0; i < enemies.Length; i++) {
-            //Is this enemy within a 35 degrees of our current aim?
+            //Is this enemy within a 45 degrees of our current aim?
             if(Vector2.Angle(weaponHeading.normalized, (enemies[i].transform.position-transform.position).normalized) > 45) { continue; }
             
             //Is this enemy closer?
